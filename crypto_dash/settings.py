@@ -28,7 +28,11 @@ SECRET_KEY = 'django-insecure-fsvh!*j_g(*+rqs7-zqw49a4yn5&=4pmt0a7p5(#1wgx3(w4*+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    '10.0.0.226',
+    'https://crypto-tracker-dashboard.herokuapp.com/',
+]
 
 
 # Application definition
