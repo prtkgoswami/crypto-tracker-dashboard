@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views import View
 import requests
 from datetime import datetime
+import rest_framework
 # Create your views here.
 
 API_collections = [
