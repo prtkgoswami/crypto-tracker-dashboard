@@ -1,1 +1,1 @@
-web:gunicorn crypto_dash.wsgi
+web: gunicorn crypto_dash.wsgi
