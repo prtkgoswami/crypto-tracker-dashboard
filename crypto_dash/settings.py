@@ -14,17 +14,23 @@ from pathlib import Path
 import os
 import sys
 import django_heroku
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_DIR = os.path.dirname(__file__)
+env = environ.Env()
+environ.Env.read_env()
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-fsvh!*j_g(*+rqs7-zqw49a4yn5&=4pmt0a7p5(#1wgx3(w4*+'
+# SECRET_KEY = 'django-insecure-fsvh!*j_g(*+rqs7-zqw49a4yn5&=4pmt0a7p5(#1wgx3(w4*+'
+
+SECRET_KEY = env('DJANGO_SECRET_KEY')
+COIN_PAPRIKA_API_KEY = env('COIN_PAPRIKA_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

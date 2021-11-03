@@ -4,6 +4,7 @@ from django.views import View
 import requests
 from datetime import datetime
 import rest_framework
+from django.conf import settings
 # Create your views here.
 
 API_collections = [
@@ -17,7 +18,7 @@ API_collections = [
         'URL': 'https://coinpaprika1.p.rapidapi.com/tickers',
         'headers': {
             'x-rapidapi-host': "coinpaprika1.p.rapidapi.com",
-            'x-rapidapi-key': "b5c5007125msh15a890b33ee4acap1002c9jsnddb282d9042b"
+            'x-rapidapi-key': settings.COIN_PAPRIKA_API_KEY,
         },
     }
 ]
