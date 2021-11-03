@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views import View
 import requests
+from datetime import datetime
 # Create your views here.
 
 API_collections = [
@@ -30,7 +31,12 @@ def index(request):
 
 def api_data(request):
     coins = ['bitcoin', 'ethereum']
-    formatted_data = {'data': []}
+    formatted_data = {'api_response': {
+        'data': [],
+        'updated_time': '',
+    }}
+    timestamp = datetime.now().strftime('%H:%M:%S')
+    formatted_data['api_response']['updated_time'] = timestamp
 
     # GET COIN DATA
     for coin in coins:
@@ -45,7 +51,7 @@ def api_data(request):
             'description': response_data['description']['en'],
             'link': response_data['links']['homepage'][0],
         }
-        formatted_data['data'].append(reqd)
+        formatted_data['api_response']['data'].append(reqd)
 
     # GET MARKET DATA
     # COIN GECKO CALL
@@ -54,9 +60,9 @@ def api_data(request):
     response_data = response.json()
     index = 0
     for data in response_data:
-        formatted_data['data'][index]['prices'].append(
+        formatted_data['api_response']['data'][index]['prices'].append(
             '{:.2f}'.format(data['current_price']))
-        formatted_data['data'][index]['change_percents'].append(
+        formatted_data['api_response']['data'][index]['change_percents'].append(
             '{:.2f}'.format(data['price_change_percentage_24h']))
         index += 1
 
@@ -69,9 +75,9 @@ def api_data(request):
             if data['name'].lower() == coins[i]:
                 quotes = data['quotes']
                 market_data = quotes.get('USD')
-                formatted_data['data'][i]['prices'].append(
+                formatted_data['api_response']['data'][i]['prices'].append(
                     '{:.2f}'.format(market_data.get('price')))
-                formatted_data['data'][i]['change_percents'].append(
+                formatted_data['api_response']['data'][i]['change_percents'].append(
                     '{:.2f}'.format(market_data.get('percent_change_24h')))
 
     return JsonResponse(formatted_data)
