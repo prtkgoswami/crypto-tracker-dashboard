@@ -27,13 +27,12 @@ environ.Env.read_env()
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-fsvh!*j_g(*+rqs7-zqw49a4yn5&=4pmt0a7p5(#1wgx3(w4*+'
 
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 COIN_PAPRIKA_API_KEY = env('COIN_PAPRIKA_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
